@@ -1,0 +1,23 @@
+body { font-family: Arial, sans-serif; background: #f4f6f8; margin: 0; color: #222; }
+.container { max-width: 960px; margin: 0 auto; padding: 16px; }
+.narrow { max-width: 480px; }
+header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+h1 { font-size: 1.5rem; }
+nav { display: flex; gap: 8px; margin: 12px 0; }
+nav button.active { background: #1d5fa8; color: #fff; }
+.card { background: #fff; border-radius: 8px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.1); }
+label { display: block; margin: 8px 0; }
+input, select { display: block; width: 100%; max-width: 360px; padding: 6px; margin-top: 4px; box-sizing: border-box; }
+button { padding: 8px 14px; border: 1px solid #1d5fa8; background: #fff; color: #1d5fa8; border-radius: 4px; cursor: pointer; }
+button[type=submit], .actions button:first-child { background: #1d5fa8; color: #fff; }
+button:disabled { opacity: .5; cursor: default; }
+button.link { border: none; background: none; text-decoration: underline; padding: 0; }
+.actions { display: flex; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+th, td { text-align: right; padding: 6px; border-bottom: 1px solid #e3e3e3; }
+.pager { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+.alert { padding: 10px; border-radius: 6px; margin-top: 12px; }
+.alert.error { background: #fdecea; color: #8a1c13; }
+.alert.conflict { background: #fff4e5; color: #7a4a00; border: 1px solid #f0b350; }
+.alert.success { background: #e8f5e9; color: #1b5e20; }
+.muted { color: #666; font-size: .9rem; }
