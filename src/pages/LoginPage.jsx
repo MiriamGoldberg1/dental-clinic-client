@@ -63,7 +63,7 @@ export default function LoginPage({ onLogin }) {
             </label>
             <label>עיר<input value={register.address.city} onChange={addr('city')} /></label>
             <label>רחוב<input value={register.address.street} onChange={addr('street')} /></label>
-            <label>מספר בניין<input value={register.address.buildingNumber} onChange={addr('buildingNumber')} /></label>
+            <label>מספר בניין<input  type="number" value={register.address.buildingNumber} onChange={addr('buildingNumber')} /></label>
           </>
         )}
         <button type="submit" disabled={busy}>{mode === 'login' ? 'התחבר' : 'הירשם'}</button>
