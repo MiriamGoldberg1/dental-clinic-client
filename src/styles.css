@@ -21,3 +21,16 @@ th, td { text-align: right; padding: 6px; border-bottom: 1px solid #e3e3e3; }
 .alert.conflict { background: #fff4e5; color: #7a4a00; border: 1px solid #f0b350; }
 .alert.success { background: #e8f5e9; color: #1b5e20; }
 .muted { color: #666; font-size: .9rem; }
+button.primary { background: #1d5fa8; color: #fff; }
+.row-between { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.filters { display: flex; gap: 8px; flex-wrap: wrap; align-items: flex-end; }
+.filters input, .filters select { width: auto; min-width: 160px; }
+label.inline { margin: 0; }
+.row-actions { display: flex; gap: 12px; white-space: nowrap; }
+.details { display: grid; grid-template-columns: max-content 1fr; gap: 6px 16px; }
+.details dt { font-weight: bold; }
+.details dd { margin: 0; }
+fieldset { border: 1px solid #ddd; border-radius: 6px; margin: 8px 0; max-width: 360px; }
+label.checkbox { display: flex; align-items: center; gap: 6px; margin: 4px 0; }
+label.checkbox input { width: auto; display: inline; margin: 0; }
+h3 { margin-top: 20px; }

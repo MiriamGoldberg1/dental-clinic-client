@@ -1,17 +1,13 @@
 import { useState } from 'react';
 import { api } from '../api.js';
-import { ErrorBox } from '../components.jsx';
-
-const emptyRegister = {
-  name: '', phone: '', email: '', password: '', dateOfBirth: '', gender: 'Male',
-  address: { city: '', street: '', buildingNumber: '' }
-};
+import { ErrorBox, PersonFields, emptyPerson } from '../components.jsx';
 
 // מסך התחברות והרשמה: שומר את ה-JWT שהתקבל מהשרת
 export default function LoginPage({ onLogin }) {
   const [mode, setMode] = useState('login');
-  const [login, setLogin] = useState({ email: 'patient@clinic.local', password: 'Patient123!' });
-  const [register, setRegister] = useState(emptyRegister);
+  const [login, setLogin] = useState({ email: 'admin@clinic.local', password: 'Admin123!' });
+  const [person, setPerson] = useState(emptyPerson);
+  const [account, setAccount] = useState({ email: '', password: '' });
   const [error, setError] = useState(null);
   const [busy, setBusy] = useState(false);
 
@@ -22,7 +18,7 @@ export default function LoginPage({ onLogin }) {
     try {
       const data = mode === 'login'
         ? await api('/api/auth/login', { method: 'POST', body: login })
-        : await api('/api/auth/register', { method: 'POST', body: register });
+        : await api('/api/auth/register', { method: 'POST', body: { ...person, ...account } });
       onLogin(data);
     } catch (err) {
       setError(err);
@@ -31,15 +27,12 @@ export default function LoginPage({ onLogin }) {
     }
   };
 
-  const reg = (field) => (e) => setRegister({ ...register, [field]: e.target.value });
-  const addr = (field) => (e) => setRegister({ ...register, address: { ...register.address, [field]: e.target.value } });
-
   return (
     <div className="container narrow">
       <h1>מרפאת שיניים</h1>
       <nav>
         <button className={mode === 'login' ? 'active' : ''} onClick={() => setMode('login')}>התחברות</button>
-        <button className={mode === 'register' ? 'active' : ''} onClick={() => setMode('register')}>הרשמה</button>
+        <button className={mode === 'register' ? 'active' : ''} onClick={() => setMode('register')}>הרשמה כמטופל</button>
       </nav>
       <form className="card" onSubmit={submit}>
         {mode === 'login' ? (
@@ -50,20 +43,9 @@ export default function LoginPage({ onLogin }) {
           </>
         ) : (
           <>
-            <label>שם מלא<input value={register.name} onChange={reg('name')} /></label>
-            <label>טלפון<input value={register.phone} onChange={reg('phone')} placeholder="050-1234567" /></label>
-            <label>אימייל<input type="email" value={register.email} onChange={reg('email')} /></label>
-            <label>סיסמה (8 תווים לפחות)<input type="password" value={register.password} onChange={reg('password')} /></label>
-            <label>תאריך לידה<input type="date" value={register.dateOfBirth} onChange={reg('dateOfBirth')} /></label>
-            <label>מגדר
-              <select value={register.gender} onChange={reg('gender')}>
-                <option value="Male">זכר</option>
-                <option value="Female">נקבה</option>
-              </select>
-            </label>
-            <label>עיר<input value={register.address.city} onChange={addr('city')} /></label>
-            <label>רחוב<input value={register.address.street} onChange={addr('street')} /></label>
-            <label>מספר בניין<input  type="number" value={register.address.buildingNumber} onChange={addr('buildingNumber')} /></label>
+            <label>אימייל<input type="email" value={account.email} onChange={(e) => setAccount({ ...account, email: e.target.value })} /></label>
+            <label>סיסמה (8 תווים לפחות)<input type="password" value={account.password} onChange={(e) => setAccount({ ...account, password: e.target.value })} /></label>
+            <PersonFields value={person} onChange={setPerson} />
           </>
         )}
         <button type="submit" disabled={busy}>{mode === 'login' ? 'התחבר' : 'הירשם'}</button>
